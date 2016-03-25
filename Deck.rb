@@ -13,8 +13,13 @@ class Deck
 		array.insert(int, "B")
 	end
 
-	def triple_cut
-		arr[0, arr.index("B")]
+	def triple_cut(array)
+		a = array.index("A")
+		b = array.index("B")
+		abv_a = 0..a-1
+		bel_b = elevi-x+1..array.index(aarray.last)
+
+
 	end
 
 end
