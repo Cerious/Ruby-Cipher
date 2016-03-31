@@ -58,7 +58,7 @@ class Deck
 	end
 
 	def out_letter
-		@deck[@deck[0] - 1]
+		val = @deck[@deck[0] - 1]
 
 		let_to_num = {
 			1 => "A"
@@ -89,11 +89,10 @@ class Deck
 			26 =>"Z"
 		}
 
+		out = []
+		out << let_to_num[val]
+
 	end
-
-
-
-
 
 end
 
