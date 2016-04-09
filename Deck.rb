@@ -56,7 +56,7 @@ class Deck
 			val = 53
 		end
 
-		arr = @deck.slice(@deck.index(0..val))
+		#arr = @deck.slice(@deck.index(0..val))
 		@deck.slice!(@deck.index(0..val))
 		@deck = arr.concat(@deck)
 		return @deck 
