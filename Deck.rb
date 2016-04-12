@@ -1,6 +1,6 @@
-class Deck 
-	
-	def initialize 
+class Deck
+
+	def initialize
 		@deck = (1..52).to_a << "A" << "B"
 	end
 
@@ -20,9 +20,9 @@ class Deck
 		a = @deck.index("A")
 		b = @deck.index("B")
 		abv_b = (0..b-1)
-		x = abv_b.size	
+		x = abv_b.size
 		bel_a = (a-x+1)..@deck.index(@deck.last)
-		take_b = @deck.slice(abv_b)	 
+		take_b = @deck.slice(abv_b)
 		@deck.slice!(abv_b)
 		take_a = @deck.slice(bel_a)
 		@deck.slice!(bel_a)
@@ -49,17 +49,20 @@ class Deck
 
 	def cut_count
 		triple_cut
-		val = @deck.last
+		bottom_val = @deck.last
 		a = "A"
 		b = "B"
+
 		if @deck.last == a or b
 			val = 53
 		end
 
-		#arr = @deck.slice(@deck.index(0..val))
-		@deck.slice!(@deck.index(0..val))
-		@deck = arr.concat(@deck)
-		return @deck 
+		arr = @deck.slice(0..(bottom_val-1))
+		@deck.slice!(0..(bottom_val-1))
+		@deck.insert(@deck.index(@deck.last), arr)
+		@deck.flatten!
+		@deck
+
 	end
 
 	def out_letter
@@ -71,7 +74,7 @@ class Deck
 		out << let_to_num[@deck[val]]
 
 	end
-	
+
 	def deck_p                       ## For test purposes only.
 		return @deck
 	end
@@ -79,7 +82,3 @@ end
 
 yugi = Deck.new
 print yugi.cut_count
-
-
-
-
