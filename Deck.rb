@@ -61,18 +61,17 @@ class Deck
 		@deck.slice!(0..(bottom_val-1))
 		@deck.insert(@deck.index(@deck.last), arr)
 		@deck.flatten!
-		@deck
 
 	end
 
-	def out_letter
-		val = @deck[@deck[0] - 1]
+	def out_letter #string characters are not skipped
+			cut_count
+			val = @deck[@deck[0] - 2]
 
-		let_to_num = { 1 => 'A', 2 =>  'B', 3 => 'C', 4 => 'D', 5 => 'E', 6 => 'F', 7 => 'G', 8 => 'H', 9 => 'I', 10 => 'I', 11 => 'K', 12 => 'L', 13 => 'M', 14 => 'N', 15 => 'O', 16 => 'P', 17 => 'Q', 18 => 'R', 19 => 'S', 20 => 'T', 21 => 'U', 22 => 'V', 23 => 'W', 24 => 'X', 25 => 'Y', 26 => 'Z'}
+			let_to_num = { 1 => 'A', 2 =>  'B', 3 => 'C', 4 => 'D', 5 => 'E', 6 => 'F', 7 => 'G', 8 => 'H', 9 => 'I', 10 => 'I', 11 => 'K', 12 => 'L', 13 => 'M', 14 => 'N', 15 => 'O', 16 => 'P', 17 => 'Q', 18 => 'R', 19 => 'S', 20 => 'T', 21 => 'U', 22 => 'V', 23 => 'W', 24 => 'X', 25 => 'Y', 26 => 'Z'}
 
-		out = []
-		out << let_to_num[@deck[val]]
-
+			out = []
+			out << let_to_num[@deck[val]]
 	end
 
 	def deck_p                       ## For test purposes only.
@@ -81,4 +80,4 @@ class Deck
 end
 
 yugi = Deck.new
-print yugi.cut_count
+print yugi.out_letter
