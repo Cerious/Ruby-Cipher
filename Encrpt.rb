@@ -3,21 +3,17 @@ class Encrypter
 	def initialize(keystream)
 		@keystream = keystream
 	end
-	
+
 	def clean(x)
-		nu_str = x.gsub(/\p{Punct}/, "")
-  		nu_str.gsub!(/\p{blank}/, "")
-  		new_str = ""
-  		(nu_str.size / 5).times { |i| new_str << nu_str[i*5, 5] << " " }
-  		if str.size % 5 == 4
-  			1.times { str << "X" }
-		elsif str.size % 5 == 3
-  			2.times { str << "X" }
-		elsif str.size % 5 == 2
-  			3.times { str << "X" }
-		elsif str.size % 5 == 1
-  			4.times { str << "X" }
-		end
+	    str = x.gsub(/\p{Punct}/, "")
+	    str.gsub!(/\p{blank}/, "")
+	    str.upcase!
+	    until str.size % 5 == 0
+	      str << "X"
+	    end
+	    new_str = ""
+	    (str.size / 5).times { |i| new_str << str[i*5, 5] << " " }
+	    new_str
 	end
 
 	def conv(x)
@@ -31,8 +27,8 @@ class Encrypter
   		return out
 	end
 
+	def de_conv(x)
+	end
+
 
 end
-
-	
-
