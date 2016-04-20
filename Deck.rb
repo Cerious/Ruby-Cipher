@@ -15,6 +15,8 @@ class Deck
 	end
 
 	def triple_cut
+		move_downA
+		move_downB
 			a = @deck.index("A")
 			b = @deck.index("B")
 			abv_b = (0..b-1)
@@ -45,48 +47,38 @@ class Deck
 
 	end
 
+
 	def cut_count
-  	2.times do
-			triple_cut
+		triple_cut
 			bottom_val = @deck.last
 			a = "A"
 			b = "B"
 
-			if @deck.last == a or b
-				@deck.last == 53
-			end
+			@deck[-1] == 53 if @deck[-1].is_a? String
 
 
-			arr = @deck.slice(0..@deck.last-1)
+			arr = @deck[0..(@deck[-1]-1)]
 			@deck.slice!(0..@deck.last-1)
 			@deck.insert(@deck.index(@deck.last), arr)
 			@deck.flatten!
-		end
-
-
-
+			move_downA
+			move_downB
+			@deck[52]
+			#deck_p
 	end
 
 	def out_letter #string characters are not skipped
 		#@deck.reject {@deck[0].is_a? String}
 		frst = @deck.first
-
 		frst = 53 if @deck[0].is_a? String
 		out = @deck[frst]
+
 		if out.is_a? String
 			nil
 		else
 			out -= 26 if out > 26
 			(out + 64).chr
 		end
-
-
-		#val = @deck[@deck[0] - 2]
-
-	  #let_to_num = { 1 => 'A', 2 =>  'B', 3 => 'C', 4 => 'D', 5 => 'E', 6 => 'F', 7 => 'G', 8 => 'H', 9 => 'I', 10 => 'I', 11 => 'K', 12 => 'L', 13 => 'M', 14 => 'N', 15 => 'O', 16 => 'P', 17 => 'Q', 18 => 'R', 19 => 'S', 20 => 'T', 21 => 'U', 22 => 'V', 23 => 'W', 24 => 'X', 25 => 'Y', 26 => 'Z'}
-
-		#out = []
-		#out << let_to_num[@deck[val]]
 	end
 
 	def deck_p                       ## For test purposes only.
@@ -94,16 +86,18 @@ class Deck
 	end
 
 	def gen_keystream(string)
-		(string.length).times do
-			move_downA
-			move_downB
-			triple_cut
+		res = []
+		while res.size < string.size
 			cut_count
-			out_letter
+			let  = out_letter
+			res << let unless let.nil?
 		end
+		return res
+
 	end
 
 end
 
 yugi = Deck.new
-print yugi.gen_keystream("hi")
+print yugi.cut_count
+#the problem is that we cannot convert "B" into 53
