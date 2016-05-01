@@ -49,36 +49,33 @@ class Deck
 
 
 	def cut_count
-		triple_cut
-			bottom_val = @deck.last
-			a = "A"
-			b = "B"
-
-			@deck[-1] == 53 if @deck[-1].is_a? String
-
-
-			arr = @deck[0..(@deck[-1]-1)]
-			@deck.slice!(0..@deck.last-1)
-			@deck.insert(@deck.index(@deck.last), arr)
-			@deck.flatten!
-			move_downA
-			move_downB
-			@deck[52]
-			#deck_p
+			triple_cut
+=begin
+			if @deck[0].is_a? String
+				@deck = @deck.reject{|x| x.is_a? String}
+			end
+=end
+			@deck.each do |x|
+				if @deck[-1].is_a? String
+					@deck[-1] = 53
+				end
+				arr = @deck[0..(@deck[-1]-1)]
+				@deck.slice!(0..@deck.last-1)
+			  @deck.insert(@deck.index(@deck.last), arr)
+			  @deck.flatten!
+			end
+			triple_cut
+			#@deck[52]
+			deck_p
 	end
 
 	def out_letter #string characters are not skipped
-		#@deck.reject {@deck[0].is_a? String}
+		cut_count
 		frst = @deck.first
-		frst = 53 if @deck[0].is_a? String
 		out = @deck[frst]
-
-		if out.is_a? String
-			nil
-		else
-			out -= 26 if out > 26
-			(out + 64).chr
-		end
+		out -= 26 if out > 26
+		res = (out + 64).chr
+		return res
 	end
 
 	def deck_p                       ## For test purposes only.
@@ -90,7 +87,7 @@ class Deck
 		while res.size < string.size
 			cut_count
 			let  = out_letter
-			res << let unless let.nil?
+			res << let
 		end
 		return res
 
@@ -99,5 +96,5 @@ class Deck
 end
 
 yugi = Deck.new
-print yugi.cut_count
+print yugi.gen_keystream("ab")
 #the problem is that we cannot convert "B" into 53
