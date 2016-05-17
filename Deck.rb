@@ -15,8 +15,8 @@ class Deck
 	end
 
 	def triple_cut
-		move_downA
-		move_downB
+			move_downA
+			move_downB
 			a = @deck.index("A")
 			b = @deck.index("B")
 			abv_b = (0..b-1)
@@ -40,6 +40,10 @@ class Deck
 			move_B(2)
 		elsif @deck[@deck.index(@deck.last) - 1] == "B"
 			move_B(1)
+		elsif @deck.include?(53)
+			fif_three = @deck.index(53)
+			@deck.delete(fif_three)
+			@deck.move_B(fif_three)
 		else
 			dwn = @deck.index("B") + 2
 			move_B(dwn)
@@ -49,28 +53,21 @@ class Deck
 
 
 	def cut_count
-			triple_cut
-=begin
-			if @deck[0].is_a? String
-				@deck = @deck.reject{|x| x.is_a? String}
+		triple_cut
+		 
+		@deck.each do |x|
+			if @deck[-1].is_a? String
+				@deck[-1] = 53
 			end
-=end
-			@deck.each do |x|
-				if @deck[-1].is_a? String
-					@deck[-1] = 53
-				end
-				arr = @deck[0..(@deck[-1]-1)]
-				@deck.slice!(0..@deck.last-1)
-			  @deck.insert(@deck.index(@deck.last), arr)
-			  @deck.flatten!
-			end
-			triple_cut
-			#@deck[52]
+			arr = @deck[0..(@deck[-1]-1)]
+			@deck.slice!(0..@deck.last-1)
+			@deck.insert(@deck.index(@deck.last), arr)
+			@deck.flatten!
+		end
 			deck_p
-	end
+		end
 
 	def out_letter #string characters are not skipped
-		cut_count
 		frst = @deck.first
 		out = @deck[frst]
 		out -= 26 if out > 26
@@ -85,9 +82,11 @@ class Deck
 	def gen_keystream(string)
 		res = []
 		while res.size < string.size
+			move_downA
+			move_downB
+			triple_cut
 			cut_count
-			let  = out_letter
-			res << let
+		  res << out_letter
 		end
 		return res
 
@@ -96,5 +95,5 @@ class Deck
 end
 
 yugi = Deck.new
-print yugi.gen_keystream("ab")
+print yugi.cut_count
 #the problem is that we cannot convert "B" into 53
