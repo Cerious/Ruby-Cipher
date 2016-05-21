@@ -15,8 +15,6 @@ class Deck
 	end
 
 	def triple_cut
-			move_downA
-			move_downB
 			a = @deck.index("A")
 			b = @deck.index("B")
 			abv_b = (0..b-1)
@@ -41,9 +39,8 @@ class Deck
 		elsif @deck[@deck.index(@deck.last) - 1] == "B"
 			move_B(1)
 		elsif @deck.include?(53)
-			fif_three = @deck.index(53)
-			@deck.delete(fif_three)
-			@deck.move_B(fif_three)
+			@deck.delete(53)
+			@deck.move_B(53)
 		else
 			dwn = @deck.index("B") + 2
 			move_B(dwn)
@@ -53,8 +50,6 @@ class Deck
 
 
 	def cut_count
-		triple_cut
-		 
 		@deck.each do |x|
 			if @deck[-1].is_a? String
 				@deck[-1] = 53
@@ -64,8 +59,8 @@ class Deck
 			@deck.insert(@deck.index(@deck.last), arr)
 			@deck.flatten!
 		end
-			deck_p
-		end
+			@deck
+	end
 
 	def out_letter #string characters are not skipped
 		frst = @deck.first
@@ -75,25 +70,23 @@ class Deck
 		return res
 	end
 
-	def deck_p                       ## For test purposes only.
-		return @deck
-	end
 
 	def gen_keystream(string)
 		res = []
 		while res.size < string.size
-			move_downA
-			move_downB
-			triple_cut
-			cut_count
-		  res << out_letter
+			(string.size).times do
+				move_downA
+				move_downB
+				triple_cut
+				cut_count
+			  res << out_letter
+			end
 		end
 		return res
-
 	end
 
 end
 
 yugi = Deck.new
-print yugi.cut_count
+print yugi.gen_keystream("ab")
 #the problem is that we cannot convert "B" into 53

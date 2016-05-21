@@ -5,8 +5,7 @@ class Encrypter
 	end
 
 	def clean(x)
-	    str = x.gsub(/\p{Punct}/, "")
-	    str.gsub!(/\p{blank}/, "")
+	    str = x.gsub(/\p{Punct}/, "")	    str.gsub!(/\p{blank}/, "")
 	    str.upcase!
 	    until str.size % 5 == 0
 	      str << "X"
