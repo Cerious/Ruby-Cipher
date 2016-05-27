@@ -15,11 +15,8 @@ class Deck
 	end
 
 	def triple_cut
-			a = @deck.index("A")
-			b = @deck.index("B")
-			abv_b = (0..b-1)
-			x = abv_b.size
-			bel_a = (a-x+1)..@deck.index(@deck.last)
+			abv_b = (0..(@deck.index("B"))-1)
+			bel_a = (@deck.index("A") - abv_b.size+1)..@deck.index(@deck.last)
 			take_b = @deck.slice(abv_b)
 			@deck.slice!(abv_b)
 			take_a = @deck.slice(bel_a)
@@ -40,7 +37,7 @@ class Deck
 			move_B(1)
 		elsif @deck.include?(53)
 			@deck.delete(53)
-			@deck.move_B(53)
+			move_B(53)
 		else
 			dwn = @deck.index("B") + 2
 			move_B(dwn)
@@ -63,6 +60,7 @@ class Deck
 	end
 
 	def out_letter #string characters are not skipped
+		deck = @deck.dup
 		frst = @deck.first
 		out = @deck[frst]
 		out -= 26 if out > 26
@@ -70,18 +68,16 @@ class Deck
 		return res
 	end
 
-
-	def gen_keystream(string)
+	def gen_keystream(string) #Value for out letter will not update.
 		res = []
-		while res.size < string.size
-			(string.size).times do
+			while res.size < string.size
 				move_downA
 				move_downB
 				triple_cut
 				cut_count
-			  res << out_letter
+				let = out_letter
+				res << let
 			end
-		end
 		return res
 	end
 
@@ -89,4 +85,3 @@ end
 
 yugi = Deck.new
 print yugi.gen_keystream("ab")
-#the problem is that we cannot convert "B" into 53
