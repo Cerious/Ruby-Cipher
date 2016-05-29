@@ -20,17 +20,27 @@ class Encrypter
 		x.gsub!(/\p{Blank}/, "")
   		arr = []
   		x.each_byte {|i| arr << i-64}
-  		inn = ""
-  		arr.collect! {|i| inn << i.to_s}
-  		out = ""
-  		(inn.size / 5).times {|i| out << inn[i*5, 5] << " "}
-  		return out
+  	#	inn = ""
+  	#	arr.collect! {|i| inn << i.to_s}
+  	#	out = ""
+  	#	(inn.size / 5).times {|i| out << inn[i*5, 5] << " "}
+  	#	return out
 	end
 
 	def de_conv(x)
 		bet = conv(x)
+	end
 
+	def add_nums(x)
+		x.times do |i|
+			val = arr[i] + arr2[i]
+			arr3 << val
+		end
+		arr3
 	end
 
 
 end
+
+encry = Encrypter.new
+puts encry.clean("hi, my name is nick.")
