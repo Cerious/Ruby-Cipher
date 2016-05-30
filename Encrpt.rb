@@ -34,9 +34,12 @@ class Encrypter
 	def add_nums(x)
 		x.times do |i|
 			val = arr[i] + arr2[i]
+			if val > 26
+				val = val - 26
+			end
 			arr3 << val
 		end
-		arr3
+		end
 	end
 
 
