@@ -75,8 +75,8 @@ class Deck
 				move_downB
 				triple_cut
 				cut_count
-				let = out_letter
-				res << let
+				@deck = cut_count
+				res << out_letter
 			end
 		return res
 	end
@@ -84,4 +84,4 @@ class Deck
 end
 
 yugi = Deck.new
-print yugi.gen_keystream("ab")
+puts yugi.out_letter

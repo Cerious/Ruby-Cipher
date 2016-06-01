@@ -29,12 +29,12 @@ class TestEncrpt << MiniTest::Test
   end
 
   def test_conv_turns_letters_into_proper_numbers
-    assert_equal $crypt.clean("A"), 1
-    assert_equal $crypt.clean("G"), 7
+    assert_equal $crypt.clean("A"), [1]
+    assert_equal $crypt.clean("G"), [7]
   end
 
   def test_conv_works_with_strings_of_length_one
-    assert_equal $crypt.conv("S")
+    assert_equal $crypt.conv("S"), [18]
   end
 
 end
