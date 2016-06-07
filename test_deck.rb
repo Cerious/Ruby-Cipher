@@ -59,9 +59,13 @@ class TestDeck < MiniTest::Test
   end
 
   def test_move_down_A
+    $arr.delete("A")
+    $arr.insert($arr.index($arr.last), "A")
+    assert_equal $arr, $d1.move_downA
   end
 
   def test_move_down_B
+    
   end
 
   def test_triple_cut
@@ -93,5 +97,6 @@ class TestDeck < MiniTest::Test
   end
 
   def test_B_equals_53_when_last
+    assert_equal $d1.include?(4)
   end
 end

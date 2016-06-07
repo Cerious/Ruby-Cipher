@@ -68,6 +68,24 @@ class Deck
 		return res
 	end
 
+	def generate_keystream( length )
+      deck = @deck.dup
+      result = []
+			puts deck.id
+
+=begin
+      while result.length != length
+        deck.move_downA
+        deck.move_downB
+        deck.triple_cut
+        deck.count_cut
+        letter = deck.output_letter
+        result << letter unless letter.nil?
+      end
+      result.join
+=end
+    end
+=begin
 	def gen_keystream(string) #Value for out letter will not update.
 		res = []
 			while res.size < string.size
@@ -80,8 +98,8 @@ class Deck
 			end
 		return res
 	end
-
+=end
 end
 
 yugi = Deck.new
-puts yugi.out_letter
+puts yugi.generate_keystream(10)
