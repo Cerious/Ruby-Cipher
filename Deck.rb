@@ -60,7 +60,6 @@ class Deck
 	end
 
 	def out_letter #string characters are not skipped
-		deck = @deck.dup
 		frst = @deck.first
 		out = @deck[frst]
 		out -= 26 if out > 26
@@ -69,21 +68,18 @@ class Deck
 	end
 
 	def generate_keystream( length )
-      deck = @deck.dup
-      result = []
-			puts deck.id
+		deck = @deck.clone
+			result = []
 
-=begin
       while result.length != length
         deck.move_downA
         deck.move_downB
-        deck.triple_cut
-        deck.count_cut
-        letter = deck.output_letter
+      	deck.triple_cut
+        deck.cut_count
+        letter = deck.out_letter
         result << letter unless letter.nil?
       end
       result.join
-=end
     end
 =begin
 	def gen_keystream(string) #Value for out letter will not update.
