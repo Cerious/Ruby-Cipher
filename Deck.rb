@@ -1,7 +1,7 @@
 class Deck
-
+attr_writer :deck
 	def initialize
-		@deck = (1..52).to_a << "A" << "B"
+		@deck = deck = (1..52).to_a << "A" << "B"
 	end
 
 	def move_A(int)
@@ -68,18 +68,22 @@ class Deck
 	end
 
 	def generate_keystream( length )
-		deck = @deck.clone
+		deck = @deck.dup
 			result = []
 
-      while result.length != length
-        deck.move_downA
-        deck.move_downB
-      	deck.triple_cut
-        deck.cut_count
-        letter = deck.out_letter
-        result << letter unless letter.nil?
-      end
-      result.join
+      #while result.length != length
+        move_downA
+        move_downB
+      	triple_cut
+        cut_count
+				move_downA
+        move_downB
+      	triple_cut
+        cut_count
+        result << out_letter unless out_letter.nil?
+				result
+    #  end
+      #result.join
     end
 =begin
 	def gen_keystream(string) #Value for out letter will not update.

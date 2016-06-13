@@ -1,3 +1,4 @@
+require_relative 'Deck'
 
 class Encrypter
 	def initialize(keystream)
