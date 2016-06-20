@@ -17,7 +17,7 @@ class TestEncrpt << MiniTest::Test
 
   def test_strings_not_divisible_by_five_are_X_padded
     assert_equal $crypt.clean("hey"), "HEYXX"
-    assert_equal $crpt.clean("string"), "STRING XXXXX"
+    assert_equal $crypt.clean("string"), "STRING XXXXX"
   end
 
   def test_strings_in_clean_return_upcase
