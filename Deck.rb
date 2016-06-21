@@ -1,7 +1,7 @@
 class Deck
 attr_writer :deck
 	def initialize
-		@deck = deck = (1..52).to_a << "A" << "B"
+		@deck = (1..52).to_a << "A" << "B"
 	end
 
 	def move_A(int)
@@ -37,7 +37,7 @@ attr_writer :deck
 			move_B(1)
 		elsif @deck.include?(53)
 			@deck.delete(53)
-			move_B(53)
+			move_B(52)
 		else
 			dwn = @deck.index("B") + 2
 			move_B(dwn)
@@ -56,10 +56,21 @@ attr_writer :deck
 			@deck.insert(@deck.index(@deck.last), arr)
 			@deck.flatten!
 		end
-			@deck
+
+=begin
+		move_downA
+		print " 2nd iteration with move_downB #{@deck}"
+		move_downB
+		print " 2nd iteration with move_downB #{@deck}"
+=end
 	end
 
 	def out_letter #string characters are not skipped
+		if @deck[0].is_a? String
+			puts " hello"
+			@deck[0] = 53
+		end
+			print " Cut_count out_put: #{@deck}"
 		frst = @deck.first
 		out = @deck[frst]
 		out -= 26 if out > 26
@@ -71,35 +82,19 @@ attr_writer :deck
 		deck = @deck.dup
 			result = []
 
-      #while result.length != length
+      while result.length != length
         move_downA
-        move_downB
-      	triple_cut
-        cut_count
-				move_downA
         move_downB
       	triple_cut
         cut_count
         result << out_letter unless out_letter.nil?
 				result
-    #  end
-      #result.join
+    	end
+      puts " #{result.join}"
+			#puts @deck.last
+			#puts @deck.index(@deck.last)
     end
-=begin
-	def gen_keystream(string) #Value for out letter will not update.
-		res = []
-			while res.size < string.size
-				move_downA
-				move_downB
-				triple_cut
-				cut_count
-				@deck = cut_count
-				res << out_letter
-			end
-		return res
-	end
-=end
 end
 
 yugi = Deck.new
-puts yugi.generate_keystream(10)
+print yugi.generate_keystream(3)
