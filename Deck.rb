@@ -1,33 +1,59 @@
 class Deck
-attr_writer :deck
 	def initialize
 		@deck = (1..52).to_a << "A" << "B"
 	end
 
+
 	def move_A(int)
 		@deck.delete("A")
 		@deck.insert(int, "A")
+		puts ""
+		puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>move_A: #{@deck}"
 	end
 
 	def move_B(int)
 		@deck.delete("B")
 		@deck.insert(int, "B")
+		puts ""
+		puts "move_B: #{@deck}"
 	end
 
 	def triple_cut
+			puts ""
+			puts ""
+			puts ""
+			puts ""
+			puts ""
+			puts ""
+			puts ""
+			puts ""
 			abv_b = (0..(@deck.index("B"))-1)
 			bel_a = (@deck.index("A") - abv_b.size+1)..@deck.index(@deck.last)
 			take_b = @deck.slice(abv_b)
 			@deck.slice!(abv_b)
+			puts "triple_cut_op1: #{@deck}"
 			take_a = @deck.slice(bel_a)
 			@deck.slice!(bel_a)
+			puts "triple_cut_op2: #{@deck}"
 			@deck = @deck.concat(take_b)
+			puts "triple_cut_op3: #{@deck}"
 			take_a.each {|i| @deck << i}
+			puts "triple_cut_opFinal: #{@deck}"
+			puts ""
+			puts ""
+			puts ""
+			puts ""
+			puts ""
+			puts ""
+			puts ""
+			puts ""
 			return @deck
 	end
 
 	def move_downA
 		move_A(@deck.index("A") + 1)
+		puts ""
+		puts "move_downA: #{@deck}"
 	end
 
 	def move_downB
@@ -42,7 +68,8 @@ attr_writer :deck
 			dwn = @deck.index("B") + 2
 			move_B(dwn)
 		end
-
+		puts ""
+		puts "move_downB: #{@deck}"
 	end
 
 
@@ -55,7 +82,10 @@ attr_writer :deck
 			@deck.slice!(0..@deck.last-1)
 			@deck.insert(@deck.index(@deck.last), arr)
 			@deck.flatten!
+			@deck
 		end
+		puts ""
+		print " Cut_count out_put: #{@deck} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
 
 =begin
 		move_downA
@@ -67,28 +97,23 @@ attr_writer :deck
 
 	def out_letter #string characters are not skipped
 		if @deck[0].is_a? String
-			puts " hello"
 			@deck[0] = 53
 		end
-			print " Cut_count out_put: #{@deck}"
-		frst = @deck.first
-		out = @deck[frst]
+		out = @deck[@deck.first]
 		out -= 26 if out > 26
 		res = (out + 64).chr
 		return res
 	end
 
 	def generate_keystream( length )
-		deck = @deck.dup
 			result = []
 
-      while result.length != length
+      while result.size != length
         move_downA
         move_downB
       	triple_cut
         cut_count
-        result << out_letter unless out_letter.nil?
-				result
+      	result << out_letter unless out_letter.nil?
     	end
       puts " #{result.join}"
 			#puts @deck.last
@@ -97,4 +122,4 @@ attr_writer :deck
 end
 
 yugi = Deck.new
-print yugi.generate_keystream(3)
+print yugi.generate_keystream(1)

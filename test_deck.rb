@@ -65,7 +65,7 @@ class TestDeck < MiniTest::Test
   end
 
   def test_move_down_B
-    
+  skip 
   end
 
   def test_triple_cut
