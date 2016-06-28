@@ -1,6 +1,6 @@
 class Deck
 	def initialize
-		@deck = (1..52).to_a << "A" << "B"
+		@deck = ["B", 6, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 52, 1, 2, 9, 10, 11, 3, "A", 4, 5, 7, 8, 12, 13, 51]
 	end
 
 
@@ -63,6 +63,8 @@ class Deck
 		 @deck.replace( [ @deck[(b + 1)..-1],
 											@deck[a..b],
 											@deck[0...a] ].flatten )
+		 puts ""
+		 puts "Triple_cut: #{@deck}"
 	end
 
 	def move_downA
@@ -142,5 +144,6 @@ class Deck
     end
 end
 
+
 yugi = Deck.new
-print yugi.generate_keystream(6)
+print yugi.generate_keystream(1)
