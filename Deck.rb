@@ -17,44 +17,7 @@ class Deck
 		puts ""
 		puts "move_B: #{@deck}"
 	end
-=begin
-	def triple_cut
-			puts ""
-			puts ""
-			puts ""
-			puts ""
-			puts ""
-			puts ""
-			puts ""
-			puts ""
-			puts "#{@deck}"
-			abv_b = (0..(@deck.index("B"))-1)  #range from beginning of arr to b4 "B"
-			puts "Above_B: #{abv_b}"
-			bel_a = (@deck.index("A") - abv_b.size+1)..@deck.index(@deck.last) #range from *<x> to end of arr
-			puts "Below_A: #{bel_a}"
-			take_b = @deck.slice(abv_b) #captures the numbers above "B"
-			puts "Take_b_arr: #{take_b}"
-			@deck.slice!(abv_b) #slices the numbers below "B" from the array
-			puts "triple_cut_op1: #{@deck}"
-			take_a = @deck.slice(bel_a) #captures the number below "A"
-			puts "Take_A_arr: #{take_a}"
-			@deck.slice!(bel_a) #slices the numbers below "B"
-			puts "triple_cut_op2: #{@deck}"
-			@deck = @deck.concat(take_b) #puts numbers abv_b at the end of arr
-			puts "triple_cut_op3: #{@deck}"
-			take_a.each {|i| @deck << i}
-			puts "triple_cut_opFinal: #{@deck}"
-			puts ""
-			puts ""
-			puts ""
-			puts ""
-			puts ""
-			puts ""
-			puts ""
-			puts ""
-			return @deck
-	end
-=end
+
 
 	def triple_cut
 		 a = @deck.index( 'A' )
@@ -102,12 +65,6 @@ class Deck
 		puts ""
 		print " Cut_count out_put: #{@deck} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
 
-=begin
-		move_downA
-		print " 2nd iteration with move_downB #{@deck}"
-		move_downB
-		print " 2nd iteration with move_downB #{@deck}"
-=end
 	end
 
 	def out_letter #string characters are not skipped
@@ -137,8 +94,6 @@ class Deck
     	end
 			result.compact!
       puts " #{result.join}"
-			#puts @deck.last
-			#puts @deck.index(@deck.last)
     end
 end
 
