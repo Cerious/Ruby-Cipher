@@ -1,6 +1,6 @@
 class Deck
 	def initialize
-		@deck = ["B", 6, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 52, 1, 2, 9, 10, 11, 3, "A", 4, 5, 7, 8, 12, 13, 51]
+		@deck = [6, "A", 51, 4, 5, 7, 8, "B", 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 52, 1, 2, 9, 10, 11, 3]
 	end
 
 
@@ -8,7 +8,7 @@ class Deck
 		@deck.delete("A")
 		@deck.insert(int, "A")
 		puts ""
-		puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>move_A: #{@deck}"
+		puts "START>>>>>>>>>>>>>>>>>>>>>>>>>>>>move_A: #{@deck}"
 	end
 
 	def move_B(int)
@@ -44,6 +44,7 @@ class Deck
 		elsif @deck.include?(53)
 			@deck.delete(53)
 			move_B(52)
+			move_B(1)
 		else
 			dwn = @deck.index("B") + 2
 			move_B(dwn)
@@ -65,7 +66,7 @@ class Deck
 			@deck
 		end
 		puts ""
-		print " Cut_count out_put: #{@deck} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+		print " Cut_count out_put: #{@deck} <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<END"
 
 =begin
 		move_downA
@@ -109,4 +110,4 @@ end
 
 
 yugi = Deck.new
-print yugi.generate_keystream(1)
+print yugi.generate_keystream(2)

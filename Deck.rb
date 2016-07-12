@@ -1,3 +1,6 @@
+### Does not output correct values past i:6
+### Does not work past unlucky i:13
+
 class Deck
 	def initialize
 		@deck = (1..52).to_a << "A" << "B"
@@ -42,6 +45,7 @@ class Deck
 		elsif @deck.include?(53)
 			@deck.delete(53)
 			move_B(52)
+			move_B(1)
 		else
 			dwn = @deck.index("B") + 2
 			move_B(dwn)
@@ -98,4 +102,4 @@ class Deck
 end
 
 yugi = Deck.new
-print yugi.generate_keystream(6)
+print yugi.generate_keystream(7)
