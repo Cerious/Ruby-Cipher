@@ -1,5 +1,5 @@
 ### Does not output correct values past i:6
-### Does not work past unlucky i:13
+### Does not work past  i:18
 
 class Deck
 	def initialize
@@ -29,6 +29,9 @@ class Deck
 		 @deck.replace( [ @deck[(b + 1)..-1],
 											@deck[a..b],
 											@deck[0...a] ].flatten )
+
+											puts ""
+											puts "Triple_cut: #{@deck}"
 	end
 
 	def move_downA
@@ -102,4 +105,4 @@ class Deck
 end
 
 yugi = Deck.new
-print yugi.generate_keystream(7)
+print yugi.generate_keystream(6)
