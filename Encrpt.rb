@@ -40,7 +40,6 @@ class Encrypter
 			end
 			arr3 << val
 		end
-		end
 	end
 
 
