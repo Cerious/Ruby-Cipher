@@ -112,9 +112,7 @@ class Deck
       	result << out_letter unless out_letter.nil?
     	end
 			result.compact!
-      puts " #{result.join}"
+      #puts " #{result.join}"
+			result.join
     end
 end
-
-yugi = Deck.new
-print yugi.generate_keystream(10)
