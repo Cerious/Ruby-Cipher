@@ -1,6 +1,7 @@
-### Does not output correct values past i:6
-### Does not work past  i:18
-
+### A card Cipher that returns a string of letters based on how many times the deck is shuffled   
+### 
+###
+###
 class Deck
 	def initialize
 		@deck = (1..52).to_a << "A" << "B"
@@ -101,7 +102,7 @@ class Deck
 		return res
 	end
 
-	def generate_keystream( length )
+	def generate_keystream( shuffles )
 			result = []
 
       while result.size != length
